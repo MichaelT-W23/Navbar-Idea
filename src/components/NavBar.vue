@@ -2,55 +2,53 @@
   <div>
     <nav class="navbar" ref="navbarRef">
       <img :src="YellowLogo" alt="Yellow Logo" class="logo" />
-      <div class="nav-tabs">
-        <span class="tab" @click="navigateTo('/second-page')">
-          Products
-          <i class="material-icons expand-icon">expand_more</i>
-        </span>
 
-        <span class="tab" @click="navigateTo('/second-page')">Best Sellers</span>
-        <span class="tab" @click="navigateTo('/second-page')">Our Story</span>
+      <div class="nav-center">
+        <div class="nav-tabs">
+          <span class="tab" @click="navigateTo('/second-page')">
+            Products
+            <i class="material-icons expand-icon">expand_more</i>
+          </span>
+          <span class="tab" @click="navigateTo('/best-sellers')">Best Sellers</span>
+          <span class="tab" @click="navigateTo('/our-story')">Our Story</span>
+        </div>
       </div>
-      <div class="shop-all-btn-section">
-        <span class="shop-all-btn" 
-              @click="navigateTo('/second-page')">
-              Shop All
-        </span>
+
+      <div class="nav-actions">
+        <div class="shop-all-btn-section">
+          <span class="shop-all-btn" @click="navigateTo('/shop-all')">Shop All</span>
+        </div>
+        <div class="nav-links">
+          <span
+            class="material-symbols-outlined search-icon"
+            :class="{ active: activeSideView === 'search' }"
+            @click="openSideView('search')"
+            ref="searchIcon"
+          >
+            search
+          </span>
+          <div class="divider"></div>
+          <span
+            class="material-symbols-outlined profile-icon"
+            :class="{ active: activeSideView === 'profile' }"
+            @click="openSideView('profile')"
+            ref="profileIcon"
+          >
+            account_circle
+          </span>
+          <div class="divider"></div>
+          <span
+            class="material-symbols-outlined cart-icon"
+            :class="{ active: activeSideView === 'cart' }"
+            @click="openSideView('cart')"
+            ref="cartIcon"
+          >
+            shopping_cart
+          </span>
+        </div>
       </div>
-      <div class="nav-links">
-        <span
-          class="material-symbols-outlined search-icon"
-          :class="{ active: activeSideView === 'search' }"
-          @click="openSideView('search')"
-          ref="searchIcon"
-        >
-          search
-        </span>
-        <div class="divider"></div>
-        <span
-          class="material-symbols-outlined profile-icon"
-          :class="{ active: activeSideView === 'profile' }"
-          @click="openSideView('profile')"
-          ref="profileIcon"
-        >
-          account_circle
-        </span>
-        <div class="divider"></div>
-        <span
-          class="material-symbols-outlined cart-icon"
-          :class="{ active: activeSideView === 'cart' }"
-          @click="openSideView('cart')"
-          ref="cartIcon"
-        >
-          shopping_cart
-        </span>
-      </div>
-      <div
-        class="triangle"
-        :style="{ left: activeIconPosition + 'px' }"
-        v-if="activeSideView"
-      ></div>
     </nav>
+
     <div class="content">
       <div
         class="overlay"
@@ -118,7 +116,6 @@ const updateTrianglePosition = () => {
     const rect = activeRef.value.getBoundingClientRect();
     activeIconPosition.value = rect.left + rect.width / 2;
   }
-
 };
 
 const navigateTo = (tab) => {
@@ -132,9 +129,9 @@ const handleKeydown = (event) => {
   keysPressed.add(event.code);
 
   if (
-    (keysPressed.has('AltLeft') || keysPressed.has('AltRight') 
-    || keysPressed.has('MetaLeft') || keysPressed.has('MetaRight'))
-    && keysPressed.has('KeyS')
+    (keysPressed.has('AltLeft') || keysPressed.has('AltRight') ||
+      keysPressed.has('MetaLeft') || keysPressed.has('MetaRight')) &&
+    keysPressed.has('KeyS')
   ) {
     event.preventDefault();
     openSideView('search');
@@ -161,7 +158,6 @@ onUnmounted(() => {
   window.removeEventListener('keydown', handleKeydown);
   window.removeEventListener('keyup', handleKeyup);
 });
-
 </script>
 
 <style scoped>
@@ -177,7 +173,6 @@ onUnmounted(() => {
   background-color: #00a6ce;
   transition: transform 0.2s ease;
   transform: translateY(0);
-  position: relative;
 }
 
 .logo {
@@ -185,16 +180,25 @@ onUnmounted(() => {
   object-fit: contain;
 }
 
+.nav-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 150px;
+}
+
 .nav-tabs {
   display: flex;
-  gap: 2.5rem;
-  font-size: 18px;
+  gap: 2rem;
+  font-size: 17px;
   color: #fff;
-  transition: color .4s ease;
+  font-family: Arial, Helvetica, sans-serif;
+  transition: color 0.4s ease;
   text-transform: uppercase;
-  letter-spacing: .1em;
+  letter-spacing: 0.1em;
   font-weight: 700;
-  text-decoration: none;
+  align-items: center;
 }
 
 .nav-tabs .tab {
@@ -202,27 +206,29 @@ onUnmounted(() => {
   padding: 5px 10px;
   border-radius: 5px;
   transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.nav-tabs .tab .expand-icon {
+  margin-left: 5px;
+  font-size: 20px;
+  align-self: center;
 }
 
 .nav-tabs .tab:hover {
   color: #e6e4e4;
 }
 
-.expand-icon {
-  /* font-size: 18px; */
-  vertical-align: middle;
-  margin-top: -5px;
-  transition: color 0.3s ease;
-}
-
-.tab:hover .expand-icon {
-  color: #e6e4e4;
+.shop-all-btn-section {
+  margin-right: 40px;
 }
 
 .shop-all-btn {
   font-size: 20px;
   color: #fff;
   font-weight: 700;
+  font-family: Arial, Helvetica, sans-serif;
   padding: 15px 30px;
   border: 2px solid white;
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -232,6 +238,11 @@ onUnmounted(() => {
 .shop-all-btn:hover {
   color: #e6e4e4;
   border: 2px solid #e6e4e4;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
 }
 
 .nav-links {
@@ -251,11 +262,6 @@ onUnmounted(() => {
 .material-symbols-outlined {
   font-size: 24px;
   cursor: pointer;
-  position: relative;
-}
-
-.content {
-  display: flex;
 }
 
 .search-icon,
@@ -269,6 +275,10 @@ onUnmounted(() => {
 .profile-icon:hover,
 .cart-icon:hover {
   color: #d2d2d2;
+}
+
+.content {
+  display: flex;
 }
 
 .overlay {
