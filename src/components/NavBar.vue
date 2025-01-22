@@ -5,7 +5,9 @@
 
       <div class="nav-center">
         <div class="nav-tabs">
-          <span class="tab" @click="navigateTo('/second-page')">
+          <span class="tab" 
+                @mouseenter="showProductsDisplay"
+                @mouseleave="hideProductsDisplay">
             Products
             <i class="material-icons expand-icon">expand_more</i>
           </span>
@@ -75,6 +77,11 @@
       </transition>
     </div>
   </div>
+  <ProductsDisplay
+    v-if="isProductsVisible"
+    @mouseenter="showProductsDisplay"
+    @mouseleave="hideProductsDisplay"
+  />
 </template>
 
 <script setup>
@@ -84,6 +91,27 @@ import SearchSideView from './SearchSideView.vue';
 import ProfileSideView from './ProfileSideView.vue';
 import CartSideView from './CartSideView.vue';
 import { useRouter } from 'vue-router';
+
+// import { showProductsDisplay, hideProductsDisplay } from './ProductsDisplay.vue';
+// import ProductsDisplay from './ProductsDisplay.vue';
+
+
+import ProductsDisplay from './ProductsDisplay.vue';
+
+const isProductsVisible = ref(false);
+
+const showProductsDisplay = () => {
+  isProductsVisible.value = true;
+};
+
+const hideProductsDisplay = () => {
+  isProductsVisible.value = false;
+};
+
+
+
+
+
 
 const activeSideView = ref(null);
 const activeIconPosition = ref(0);
