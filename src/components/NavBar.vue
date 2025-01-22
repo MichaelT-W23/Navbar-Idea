@@ -91,36 +91,30 @@ import SearchSideView from './SearchSideView.vue';
 import ProfileSideView from './ProfileSideView.vue';
 import CartSideView from './CartSideView.vue';
 import { useRouter } from 'vue-router';
-
-// import { showProductsDisplay, hideProductsDisplay } from './ProductsDisplay.vue';
-// import ProductsDisplay from './ProductsDisplay.vue';
-
-
 import ProductsDisplay from './ProductsDisplay.vue';
-
-const isProductsVisible = ref(false);
-
-const showProductsDisplay = () => {
-  isProductsVisible.value = true;
-};
-
-const hideProductsDisplay = () => {
-  isProductsVisible.value = false;
-};
-
-
-
-
-
 
 const activeSideView = ref(null);
 const activeIconPosition = ref(0);
+
+const router = useRouter();
 
 const searchIcon = ref(null);
 const profileIcon = ref(null);
 const cartIcon = ref(null);
 
-const router = useRouter();
+const isProductsVisible = ref(false);
+let hoverTimeout = null;
+
+const showProductsDisplay = () => {
+  clearTimeout(hoverTimeout);
+  isProductsVisible.value = true;
+};
+
+const hideProductsDisplay = () => {
+  hoverTimeout = setTimeout(() => {
+    isProductsVisible.value = false;
+  }, 100);
+};
 
 const openSideView = (view) => {
   activeSideView.value = view;
@@ -213,12 +207,12 @@ onUnmounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 150px;
+  margin-left: 160px;
 }
 
 .nav-tabs {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   font-size: 17px;
   color: #fff;
   font-family: Arial, Helvetica, sans-serif;
@@ -226,16 +220,18 @@ onUnmounted(() => {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-weight: 700;
+  height: 110px;
   align-items: center;
 }
 
 .nav-tabs .tab {
   cursor: pointer;
-  padding: 5px 10px;
-  border-radius: 5px;
+  padding: 0px 20px;
+  height: 100%;
   transition: background-color 0.3s ease;
   display: flex;
   align-items: center;
+  /* background-color: red; */
 }
 
 .nav-tabs .tab .expand-icon {
