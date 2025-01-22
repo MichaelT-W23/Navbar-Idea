@@ -14,10 +14,10 @@ import NavBar from "./components/NavBar.vue";
 import MobileNavBar from "./components/MobileNavBar.vue";
 // import PurpleLogo from './assets/logos/purple-logo.png';
 
-const isMobile = ref(window.innerWidth <= 800);
+const isMobile = ref(window.innerWidth <= 1126);
 
 const updateWindowSize = () => {
-  isMobile.value = window.innerWidth <= 800;
+  isMobile.value = window.innerWidth <= 1126;
 };
 
 onMounted(() => {

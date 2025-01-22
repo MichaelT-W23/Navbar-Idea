@@ -1,7 +1,9 @@
 <template>
   <div>
     <nav class="navbar" ref="navbarRef">
-      <img :src="YellowLogo" alt="Yellow Logo" class="logo" />
+      <div class="logo-container">
+        <img :src="YellowLogo" alt="Yellow Logo" class="logo" />
+      </div>
 
       <div class="nav-center">
         <div class="nav-tabs">
@@ -197,6 +199,15 @@ onUnmounted(() => {
   transform: translateY(0);
 }
 
+.logo-container {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  line-height: 0;
+  /* background-color: red; */
+  width: 250px;
+}
+
 .logo {
   height: 90px;
   object-fit: contain;
@@ -329,5 +340,29 @@ onUnmounted(() => {
   transform: translateX(-50%);
   transition: left 0.3s ease;
 }
+
+@media (max-width: 1194px) {
+  .logo-container {
+    width: 190px;
+    /* background-color: red; */
+  }
+
+  .nav-center {
+    justify-content: right;
+  }
+}
+
+@media (max-width: 1134px) {
+  .logo-container {
+    width: 182px;
+    /* background-color: red; */
+  }
+
+  .nav-center {
+    justify-content: right;
+  }
+}
+
+/* 1126 */
 
 </style>
