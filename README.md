@@ -1,7 +1,7 @@
 # Crumbs Idea
 ## [Link to Website](https://michaelt-w23.github.io/Navbar-Idea/)
 
-This is a possible replacement var bar for Cars Crumbs.
+This is a possible replacement navbar for Cars Crumbs.
 <br>
 
 ### Inspiration

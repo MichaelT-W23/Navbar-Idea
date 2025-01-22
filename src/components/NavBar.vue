@@ -2,6 +2,21 @@
   <div>
     <nav class="navbar" ref="navbarRef">
       <img :src="YellowLogo" alt="Yellow Logo" class="logo" />
+      <div class="nav-tabs">
+        <span class="tab" @click="navigateTo('/second-page')">
+          Products
+          <i class="material-icons expand-icon">expand_more</i>
+        </span>
+
+        <span class="tab" @click="navigateTo('/second-page')">Best Sellers</span>
+        <span class="tab" @click="navigateTo('/second-page')">Our Story</span>
+      </div>
+      <div class="shop-all-btn-section">
+        <span class="shop-all-btn" 
+              @click="navigateTo('/second-page')">
+              Shop All
+        </span>
+      </div>
       <div class="nav-links">
         <span
           class="material-symbols-outlined search-icon"
@@ -64,13 +79,13 @@
   </div>
 </template>
 
-
 <script setup>
 import { ref, onMounted, onUnmounted, watch } from 'vue';
 import YellowLogo from '../../images/logos/blue-logo.png';
 import SearchSideView from './SearchSideView.vue';
 import ProfileSideView from './ProfileSideView.vue';
 import CartSideView from './CartSideView.vue';
+import { useRouter } from 'vue-router';
 
 const activeSideView = ref(null);
 const activeIconPosition = ref(0);
@@ -78,6 +93,8 @@ const activeIconPosition = ref(0);
 const searchIcon = ref(null);
 const profileIcon = ref(null);
 const cartIcon = ref(null);
+
+const router = useRouter();
 
 const openSideView = (view) => {
   activeSideView.value = view;
@@ -102,6 +119,11 @@ const updateTrianglePosition = () => {
     activeIconPosition.value = rect.left + rect.width / 2;
   }
 
+};
+
+const navigateTo = (tab) => {
+  console.log(`Navigate to: ${tab}`);
+  router.push(tab);
 };
 
 const keysPressed = new Set();
@@ -142,7 +164,6 @@ onUnmounted(() => {
 
 </script>
 
-
 <style scoped>
 .navbar {
   position: sticky;
@@ -162,6 +183,55 @@ onUnmounted(() => {
 .logo {
   height: 90px;
   object-fit: contain;
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 2.5rem;
+  font-size: 18px;
+  color: #fff;
+  transition: color .4s ease;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.nav-tabs .tab {
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-tabs .tab:hover {
+  color: #e6e4e4;
+}
+
+.expand-icon {
+  /* font-size: 18px; */
+  vertical-align: middle;
+  margin-top: -5px;
+  transition: color 0.3s ease;
+}
+
+.tab:hover .expand-icon {
+  color: #e6e4e4;
+}
+
+.shop-all-btn {
+  font-size: 20px;
+  color: #fff;
+  font-weight: 700;
+  padding: 15px 30px;
+  border: 2px solid white;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+}
+
+.shop-all-btn:hover {
+  color: #e6e4e4;
+  border: 2px solid #e6e4e4;
 }
 
 .nav-links {
