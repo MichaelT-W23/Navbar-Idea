@@ -56,6 +56,11 @@
           </span>
         </div>
       </div>
+      <div
+        class="triangle"
+        :style="{ left: activeIconPosition + 'px' }"
+        v-if="activeSideView"
+      ></div>
     </nav>
 
     <div class="content">
