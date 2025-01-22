@@ -84,11 +84,13 @@
       </transition>
     </div>
   </div>
-  <ProductsDisplay
-    v-if="isProductsVisible"
-    @mouseenter="showProductsDisplay"
-    @mouseleave="hideProductsDisplay"
-  />
+  <transition name="products-slide">
+    <ProductsDisplay
+      v-if="isProductsVisible"
+      @mouseenter="showProductsDisplay"
+      @mouseleave="hideProductsDisplay"
+    />
+  </transition>
 </template>
 
 <script setup>
@@ -349,6 +351,59 @@ onUnmounted(() => {
   transform: translateX(-50%);
   transition: left 0.3s ease;
 }
+
+/* Slide down/up */
+.products-slide-enter-active,
+.products-slide-leave-active {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.products-slide-enter-from {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+.products-slide-enter-to {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.products-slide-leave-from {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.products-slide-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+/* Slide left/right */
+.products-slide-horizontal-enter-active,
+.products-slide-horizontal-leave-active {
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.products-slide-horizontal-enter-from {
+  transform: translateX(-20px);
+  opacity: 0;
+}
+
+.products-slide-horizontal-enter-to {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.products-slide-horizontal-leave-from {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.products-slide-horizontal-leave-to {
+  transform: translateX(-20px);
+  opacity: 0;
+}
+
 
 @media (max-width: 1194px) {
   .logo-container {
