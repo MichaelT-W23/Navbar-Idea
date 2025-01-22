@@ -357,10 +357,13 @@ onUnmounted(() => {
   transition: left 0.3s ease;
 }
 
-/* Slide down/up */
-.products-slide-enter-active,
-.products-slide-leave-active {
+/* Slide down/up ProductDisplay */
+.products-slide-enter-active {
   transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.products-slide-leave-active {
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .products-slide-enter-from {
@@ -383,10 +386,12 @@ onUnmounted(() => {
   opacity: 0;
 }
 
-/* Slide left/right */
+
+
+/* Slide left and right views */
 .products-slide-horizontal-enter-active,
 .products-slide-horizontal-leave-active {
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
 .products-slide-horizontal-enter-from {
