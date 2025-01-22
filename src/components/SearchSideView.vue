@@ -31,7 +31,7 @@
         >
           <div @click="goToItem(item)" class="item-link">
             <img
-              :src="`../images/${item.Images[0]}`"
+              :src="getImagePath(item.Images[0])"
               alt="item.DisplayName"
               class="item-image"
             />
@@ -75,6 +75,10 @@ const filteredItems = computed(() => {
     item.DisplayName.toLowerCase().includes(searchQuery.value.toLowerCase())
   );
 });
+
+const getImagePath = (relativePath) => {
+  return new URL(`../../images/${relativePath}`, import.meta.url).href;
+};
 
 const goToItem = (item) => {
   router.push({ 
