@@ -15,6 +15,7 @@ import LinkBtn from '../components/RouterBtn.vue';
 <style scoped>
 
 .title {
+	font-size: 25px;
 	color: blue;
 	font-family: Arial, sans-serif;
 }
