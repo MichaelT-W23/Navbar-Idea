@@ -2,7 +2,12 @@
   <div>
     <nav class="navbar" ref="navbarRef">
       <div class="logo-container">
-        <img :src="YellowLogo" alt="Yellow Logo" class="logo" />
+        <img
+          :src="YellowLogo" 
+          alt="Yellow Logo"
+          @click="navigateTo('/')"
+          class="logo" 
+        />
       </div>
 
       <div class="nav-center">
@@ -211,6 +216,10 @@ onUnmounted(() => {
 .logo {
   height: 90px;
   object-fit: contain;
+}
+
+.logo:hover {
+  cursor: pointer;
 }
 
 .nav-center {
