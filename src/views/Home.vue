@@ -10,11 +10,37 @@
       <router-link to="/order" class="order-button">Order Now</router-link>
     </div>
   </div>
+  <div id="screenWidth" style="justify-content: center; font-size: 30px;">
+    Screen width: {{ screenWidth }}px
+  </div>
 </template>
 
 
 <script setup>
 import HomeCookies from '../../images/HomeCookies.jpg';
+
+
+
+import { ref, onMounted, onUnmounted } from 'vue';
+
+const screenWidth = ref(0);
+
+const updateScreenWidth = () => {
+  screenWidth.value = window.innerWidth 
+    || document.documentElement.clientWidth 
+    || document.body.clientWidth;
+}
+
+onMounted(() => {
+  updateScreenWidth();
+  window.addEventListener('resize', updateScreenWidth);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', updateScreenWidth);
+});
+
+
 </script>
 
 
