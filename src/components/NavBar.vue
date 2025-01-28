@@ -16,7 +16,9 @@
                 @mouseenter="showProductsDisplay"
                 @mouseleave="hideProductsDisplay">
             Products
-            <i class="material-icons expand-icon">expand_more</i>
+            <i class="material-icons expand-icon">
+              {{ isProductsVisible ? 'chevron_right' : 'expand_more' }}
+            </i>
           </span>
           <span class="tab" @click="navigateTo('/best-sellers')">Best Sellers</span>
           <span class="tab" @click="navigateTo('/our-story')">Our Story</span>
