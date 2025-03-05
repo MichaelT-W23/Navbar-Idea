@@ -3,11 +3,14 @@
     <nav class="navbar" ref="navbarRef">
       <div class="logo-container">
         <img
-          :src="YellowLogo" 
+          :src="currentLogo" 
           alt="Yellow Logo"
           @click="navigateTo('/')"
+          @mouseenter="hoverLogo = true"
+          @mouseleave="hoverLogo = false"
           class="logo" 
         />
+
       </div>
 
       <div class="nav-center">
@@ -100,19 +103,25 @@
   </transition>
 </template>
 
+
 <script setup>
-import { ref, onMounted, onUnmounted, watch } from 'vue';
-import YellowLogo from '../../images/logos/blue-logo.png';
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
 import SearchSideView from './SearchSideView.vue';
 import ProfileSideView from './ProfileSideView.vue';
 import CartSideView from './CartSideView.vue';
 import { useRouter } from 'vue-router';
 import ProductsDisplay from './ProductsDisplay.vue';
+import BlueLogoWhiteText from '../../images/logos/blue-logo.png';
+import BlueLogoGrayText from '../../images/logos/blue-logo-gray.png';
 
 const activeSideView = ref(null);
 const activeIconPosition = ref(0);
 
 const router = useRouter();
+
+const hoverLogo = ref(false);
+
+const currentLogo = computed(() => (hoverLogo.value ? BlueLogoGrayText : BlueLogoWhiteText));
 
 const searchIcon = ref(null);
 const profileIcon = ref(null);
@@ -196,7 +205,9 @@ onUnmounted(() => {
   window.removeEventListener('keydown', handleKeydown);
   window.removeEventListener('keyup', handleKeyup);
 });
+
 </script>
+
 
 <style scoped>
 .navbar {
